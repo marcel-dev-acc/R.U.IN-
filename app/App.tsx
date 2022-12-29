@@ -5,12 +5,16 @@ import {
 } from 'react-native';
 
 import colours from './src/constants/colours';
+import {
+  HomeScreen,
+  MessageScreen,
+} from './src/screens';
 
 const App = () => {
 
   return (
     <SafeAreaView style={styles.appContainer}>
-      
+      <MessageScreen />
     </SafeAreaView>
   );
 };
@@ -18,6 +22,7 @@ const App = () => {
 const styles = StyleSheet.create({
   appContainer: {
     flex: 1,
+    width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colours.BLACK,
