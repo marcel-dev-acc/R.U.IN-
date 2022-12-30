@@ -1,5 +1,6 @@
 type Colours = {
   BLACK: string;
+  LIGHT_GREY: string;
   WHITE: string;
   RED: string;
   LIGHT_RED: string;
@@ -10,6 +11,7 @@ type Colours = {
 
 const colours: Colours = {
   BLACK: 'rgb(0,0,0)',
+  LIGHT_GREY: 'rgb(211,211,211)',
   WHITE: 'rgb(255,255,255)',
   RED: 'rgb(255,0,0)',
   LIGHT_RED: 'rgb(250,128,114)',
