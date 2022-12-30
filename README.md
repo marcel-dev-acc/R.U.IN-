@@ -9,6 +9,13 @@ This application is built using React Native's Typescript template using the cre
 
 ## Running locally
 
-1. Run an emulator
-2. In a new command prompt run `npx react-native start`
-3. In a new command prompt run `npx react-native run-android`
+1. Create a `.env` file in the __/app__ folder of the project. You will need to replace the URL's with appropriate ones.
+
+```shell
+AUTH_URL=""
+CHAT_URL=""
+```
+
+2. Run an emulator
+3. In a new command prompt run `npx react-native start`
+4. In a new command prompt run `npx react-native run-android`

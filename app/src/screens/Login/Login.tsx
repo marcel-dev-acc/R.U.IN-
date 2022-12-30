@@ -12,6 +12,8 @@ import colours from '../../constants/colours';
 import fontSizes from '../../constants/fontSizes';
 import {Button} from '../../components';
 import {authenticateUser} from '../../services/api.auth.service';
+import {authStore} from '../../state/store';
+import {AUTH_ACTION_TYPES} from '../../state/constants';
 
 type LoginScreenProps = {
   navigation: any;
@@ -28,19 +30,31 @@ const LoginScreen = ({
 }: LoginScreenProps) => {
 
   const handleLogin = async () => {
+    setLoading(true);
     // Validate inputs
 
     // Make login request
     const response = await authenticateUser(username, password);
-    console.log(response);
     if (response.ok) {
-
+      authStore.dispatch({
+        type: AUTH_ACTION_TYPES.AUTH_REMOVED,
+        username: username,
+      });
+      authStore.dispatch({
+        type: AUTH_ACTION_TYPES.AUTH_ADDED,
+        authData: {
+          username: username,
+          token: response.data.token,
+          expiry: response.data.expiry,
+        }
+      });
     } else {
       setError(response.data);
     }
+    setLoading(false);
   };
 
-  const [loading, setLoading] = useState('');
+  const [loading, setLoading] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
