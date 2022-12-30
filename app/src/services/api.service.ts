@@ -7,7 +7,7 @@ export const get = async (url: string): Promise<Get> => {
   try {
     const response = await fetch(url);
     return {
-      ok: true,
+      ok: response.ok,
       data: await response.json(),
     };
   } catch (err) {
@@ -23,9 +23,9 @@ export type Post = {
   data: any;
 };
 
-export const post = async (url: string): Promise<Post> => {
+export const post = async (url: string, requestOptions: any): Promise<Post> => {
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, requestOptions);
     return {
       ok: true,
       data: await response.json(),

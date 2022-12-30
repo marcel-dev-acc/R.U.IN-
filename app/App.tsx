@@ -11,6 +11,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import colours from './src/constants/colours';
 import {
   HomeScreen,
+  LoginScreen,
   MessageScreen,
 } from './src/screens';
 
@@ -29,6 +30,10 @@ const App = () => {
         <Stack.Screen
           name='home'
           component={HomeScreen}
+        />
+        <Stack.Screen
+          name='login'
+          component={LoginScreen}
         />
         <Stack.Screen
           name='message'
