@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {FlatList, StyleSheet, Text, View, TextInput} from 'react-native';
+import { Button } from 'react-native-paper';
 
 import colours from '../../constants/colours';
 import fontSizes from '../../constants/fontSizes';
@@ -60,6 +61,13 @@ const MessageScreen = ({}: MessageScreenProps) => {
   return (
     <View style={styles.messagingContainer}>
       <View style={styles.headerSection}>
+        <Button
+          icon='arrow-left-bold'
+          mode='text'
+          onPress={() => console.log('Back pressed')}
+          textColor='white'
+        >
+        </Button>
         <Text style={styles.headerText}>Hello world</Text>
       </View>
       <FlatList
@@ -86,16 +94,17 @@ const styles = StyleSheet.create({
     borderColor: colours.RED,
   },
   headerSection: {
+    flexDirection: 'row',
     backgroundColor: colours.DARK_BLUE,
     width: '100%',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     borderWidth: 2,
     borderColor: colours.RED,
-    padding: 15,
+    paddingTop: 15,
+    paddingBottom: 15,
   },
   headerText: {
-    alignSelf: 'flex-start',
     color: colours.WHITE,
     fontSize: fontSizes.LARGE,
   },
@@ -106,7 +115,7 @@ const styles = StyleSheet.create({
   messageInputContainer: {
     padding: 5,
     width: '100%',
-    // alignItems: 'center',
+    alignItems: 'flex-start',
     justifyContent: 'center',
     borderWidth: 2,
     borderColor: colours.RED,

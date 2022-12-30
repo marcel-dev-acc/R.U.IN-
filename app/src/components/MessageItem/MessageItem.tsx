@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
 
 import colours from '../../constants/colours';
 import fontSizes from '../../constants/fontSizes';
@@ -34,9 +35,17 @@ const MessageItem = ({
   readAt,
 }: MessageItemProps) => {
 
+  console.log(messageId);
+
   return (
     <View style={styles.messageItemContainer}>
-      <Text style={styles.messageText}>{messageBody.body}</Text>
+      <Card>
+        <Card.Content>
+          <Paragraph>
+            {messageBody.body}
+          </Paragraph>
+        </Card.Content>
+      </Card>
     </View>
   );
 };
