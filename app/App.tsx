@@ -12,6 +12,7 @@ import colours from './src/constants/colours';
 import {
   HomeScreen,
   LoginScreen,
+  MessagesScreen,
   MessageScreen,
 } from './src/screens';
 
@@ -34,6 +35,10 @@ const App = () => {
         <Stack.Screen
           name='login'
           component={LoginScreen}
+        />
+        <Stack.Screen
+          name='messages'
+          component={MessagesScreen}
         />
         <Stack.Screen
           name='message'

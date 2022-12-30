@@ -14,6 +14,7 @@ import {Button} from '../../components';
 import {authenticateUser} from '../../services/api.auth.service';
 import {authStore} from '../../state/store';
 import {AUTH_ACTION_TYPES} from '../../state/constants';
+import {storeAuth, removeAuth} from '../../services/store.auth.service';
 
 type LoginScreenProps = {
   navigation: any;
@@ -32,7 +33,11 @@ const LoginScreen = ({
   const handleLogin = async () => {
     setLoading(true);
     // Validate inputs
-
+    if (!username || !password) {
+      setError('Username or password cannot be blank');
+      setLoading(false);
+      return;
+    }
     // Make login request
     const response = await authenticateUser(username, password);
     if (response.ok) {
@@ -48,6 +53,17 @@ const LoginScreen = ({
           expiry: response.data.expiry,
         }
       });
+      const localResponse = await storeAuth({
+        username: username,
+        password: password,
+        token: response.data.token,
+        expiry: response.data.expiry,
+      });
+      if (!localResponse.ok) {
+        setError(localResponse.message);
+        return;
+      }
+      navigation.navigate('messages');
     } else {
       setError(response.data);
     }
@@ -101,6 +117,7 @@ const LoginScreen = ({
         />
       </View>
       <Button
+        loading={loading}
         text='Give password'
         buttonColour={colours.WHITE}
         textColour={colours.BLACK}
