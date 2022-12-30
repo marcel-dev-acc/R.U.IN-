@@ -1,9 +1,15 @@
 import { get } from "./api.service";
+import environment from "../constants/env";
 
-export const fetchMessages = async (token: string, from: number, to: number, id: string) => {
-  const path = 'https://script.google.com/macros/s/AKfycbxN9-SA7T7TUvugVpcVtb_7hAXjPcc21iCa0t8aUVtjAGdDqvD2kz5FqQnPidM9irh7Ug/exec';
-  const params = `?token=${token}&from=${from}&to=${to}&id=${id}`;
-  const url = `${path}${params}`;
+export const fetchMessages = async (
+  token: string,
+  from: number,
+  to: number,
+  id: string
+) => {
+  const path: string = environment.CHAT_URL ? environment.CHAT_URL : '';
+  const params: string = `?token=${token}&from=${from}&to=${to}&id=${id}`;
+  const url: string = `${path}${params}`;
   const response = await get(url);
   if (response.ok) {
     return {
