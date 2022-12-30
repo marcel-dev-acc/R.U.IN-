@@ -1,5 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, SafeAreaView, Text} from 'react-native';
+
+import colours from '../../constants/colours';
+import fontSizes from '../../constants/fontSizes';
+import { Button } from '../../components';
 
 type HomeScreenProps = {
 };
@@ -13,25 +17,39 @@ type HomeScreenProps = {
  */
 const HomeScreen = ({}: HomeScreenProps) => {
 
+  const handleLogin = () => {
+
+  };
+
   return (
-    <View>
-    </View>
+    <SafeAreaView style={styles.homeContainer}>
+      <Text style={{
+        color: 'white',
+      }}>App here</Text>
+      <Button
+        text='Login'
+        buttonColour={colours.LIGHT_BLUE}
+        textColour={colours.BLACK}
+        textSize={fontSizes.LARGE}
+        onPress={() => {}}
+      />
+      
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   homeContainer: {
     flex: 1,
+    width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  homeLoader: {
-    marginTop: 20,
-    marginBottom: 20,
+    borderWidth: 1,
+    borderColor: colours.RED,
+    backgroundColor: colours.BLACK,
   },
   homeText: {
-    alignSelf: 'center',
-    color: 'rgba(0, 0, 0, 1)',
+    color: colours.BLACK,
   },
 });
 
