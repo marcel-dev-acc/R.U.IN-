@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, SafeAreaView, Text} from 'react-native';
+import {StyleSheet, SafeAreaView} from 'react-native';
+import {Text, Avatar} from 'react-native-paper';
 
 import colours from '../../constants/colours';
 import fontSizes from '../../constants/fontSizes';
 import { Button } from '../../components';
 
 type HomeScreenProps = {
+  navigation: any;
 };
 
 /**
@@ -15,25 +17,35 @@ type HomeScreenProps = {
  * can also hold the login / registration
  * functionality.
  */
-const HomeScreen = ({}: HomeScreenProps) => {
+const HomeScreen = ({
+  navigation
+}: HomeScreenProps) => {
 
   const handleLogin = () => {
-
+    navigation.navigate('login');
   };
 
   return (
     <SafeAreaView style={styles.homeContainer}>
-      <Text style={{
-        color: 'white',
-      }}>App here</Text>
+      <Text style={styles.homeText}>
+        R.U.IN?
+      </Text>
+      <Text style={styles.homeTextSmall}>
+        Are you in the Secret Club?
+      </Text>
+      <Avatar.Icon
+        size={200}
+        color='white'
+        icon='eye'
+        style={styles.homeLogo}
+      />
       <Button
-        text='Login'
-        buttonColour={colours.LIGHT_BLUE}
+        text='Shake hands'
+        buttonColour={colours.WHITE}
         textColour={colours.BLACK}
         textSize={fontSizes.LARGE}
-        onPress={() => {}}
+        onPress={handleLogin}
       />
-      
     </SafeAreaView>
   );
 };
@@ -44,12 +56,19 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 1,
-    borderColor: colours.RED,
     backgroundColor: colours.BLACK,
   },
   homeText: {
-    color: colours.BLACK,
+    color: colours.WHITE,
+    fontSize: fontSizes.LARGE,
+  },
+  homeTextSmall: {
+    color: colours.WHITE,
+    fontSize: fontSizes.MEDIUM,
+    fontStyle: 'italic',
+  },
+  homeLogo: {
+    backgroundColor: colours.BLACK,
   },
 });
 
