@@ -43,7 +43,7 @@ export const fetchAuth = async (): Promise<LocalFetchAuthSuccess|LocalFetchAuthF
   try {
     const response = await EncryptedStorage.getItem(authReference);
     return {
-      ok: true,
+      ok: response ? true : false,
       data: response ? JSON.parse(response) : null,
     };
   } catch (err) {

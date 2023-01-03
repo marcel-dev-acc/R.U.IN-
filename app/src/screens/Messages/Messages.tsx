@@ -1,10 +1,20 @@
 import React, {useState, useEffect} from 'react';
 import {StyleSheet, SafeAreaView, FlatList, View} from 'react-native';
-import {Provider, Portal, Text, Avatar, Modal, TextInput} from 'react-native-paper';
+import {
+  Provider,
+  Portal,
+  Text,
+  Modal,
+  TextInput,
+  Button as PaperButton,
+  Menu,
+} from 'react-native-paper';
 
 import colours from '../../constants/colours';
 import fontSizes from '../../constants/fontSizes';
 import {BondItem, Button} from '../../components';
+import {fetchBonds, storeBonds} from '../../services/store.bonds.service';
+import {removeAuth} from '../../services/store.auth.service';
 
 type MessagesScreenProps = {
   navigation: any;
@@ -22,10 +32,25 @@ const MessagesScreen = ({
 
   const handleCreateNewBond = async () => {
     setLoadingBond(true);
-    console.log(newBond);
-    setBonds([...bonds, newBond]);
+    const response = await storeBonds([...bonds, newBond]);
+    if (response.ok) {
+      setBonds([...bonds, newBond]);
+    } else {
+      // Display error toast
+      console.error('Failed to store bond data');
+    }
     setLoadingBond(false);
     setModalVisible(false);
+  };
+
+  const handleFetchBonds = async () => {
+    const response = await fetchBonds();
+    if (response.ok) setBonds(response.data);
+  };
+
+  const handleLogout = async () => {
+    const response = await removeAuth();
+    if (response.ok) navigation.navigate('home');
   };
 
   const toggleModal = () => setModalVisible(!modalVisible);
@@ -37,6 +62,11 @@ const MessagesScreen = ({
   const [newBond, setNewBond] = useState('');
   const [loadingBond, setLoadingBond] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [menuVisible, setMenuVisible] = useState(false);
+
+  useEffect(() => {
+    handleFetchBonds();
+  }, []);
 
   return (
     <Provider>
@@ -55,6 +85,7 @@ const MessagesScreen = ({
               </Text>
             }
             mode='outlined'
+            placeholder='John'
             selectionColor={colours.LIGHT_BLUE}
             placeholderTextColor={colours.WHITE}
             outlineColor={colours.WHITE}
@@ -81,6 +112,33 @@ const MessagesScreen = ({
         </Modal>
       </Portal>
       <SafeAreaView style={styles.messagesContainer}>
+        {/* Header section */}
+        <View style={styles.messagesHeaderContainer}>
+          <Text style={styles.messageHeaderText}>
+            Relationships
+          </Text>
+          <Menu
+            visible={menuVisible}
+            onDismiss={() => setMenuVisible(false)}
+            anchor={
+              <PaperButton
+                icon='dots-vertical'
+                textColor={colours.WHITE}
+                onPress={() => setMenuVisible(true)}
+                contentStyle={styles.messageHeaderMenuBtn}
+              > </PaperButton>
+            }>
+              <Menu.Item onPress={() => {
+                toggleModal();
+                setMenuVisible(false);
+              }} title='Add bond' />
+              <Menu.Item onPress={() => {
+                setMenuVisible(false);
+                handleLogout();
+              }} title='Logout' />
+          </Menu>
+        </View>
+        {/* Bond list */}
         {bonds.length === 0 && (
           <View style={styles.bondsTextContainer}>
             <Text
@@ -119,7 +177,26 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: colours.BLACK_BLUE,
+  },
+  messagesHeaderContainer: {
     backgroundColor: colours.BLACK,
+    width: '100%',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    paddingTop: 20,
+    paddingBottom: 20,
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+  messageHeaderText: {
+    color: colours.WHITE,
+    fontSize: fontSizes.LARGE,
+  },
+  messageHeaderMenuBtn: {
+    justifyContent: 'flex-end',
+    alignItems: 'center',
   },
   bondsList: {
     width: '100%',
