@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colours.BLACK,
+    backgroundColor: colours.BLACK_BLUE,
   },
   homeText: {
     color: colours.WHITE,
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
   },
   homeLogo: {
-    backgroundColor: colours.BLACK,
+    backgroundColor: colours.BLACK_BLUE,
   },
 });
 

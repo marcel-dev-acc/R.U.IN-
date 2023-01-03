@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   bondCard: {
     width: '100%',
     borderRadius: 0,
-    backgroundColor: colours.BLACK,
+    backgroundColor: colours.BLACK_BLUE,
     borderBottomWidth: 1,
     borderBottomColor: colours.WHITE,
   },

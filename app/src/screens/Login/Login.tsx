@@ -153,19 +153,19 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colours.BLACK,
+    backgroundColor: colours.BLACK_BLUE,
   },
   inputContainer: {
     margin: 25,
   },
   input: {
-    backgroundColor: colours.BLACK,
+    backgroundColor: colours.BLACK_BLUE,
     minWidth: 200,
     margin: 10,
   },
   inputLabel: {
     color: colours.WHITE,
-    backgroundColor: colours.BLACK,
+    backgroundColor: colours.BLACK_BLUE,
   },
   errorContainer: {
     margin: 25,
